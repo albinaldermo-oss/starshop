@@ -1,9 +1,12 @@
-/* Star Shop – falsk kö-skärm som visas direkt vid sidladdning för att kännas
- * överbelastad ("väldigt många handlar just nu"). Rent visuell/dekorativ. */
+/* Star Shop – falsk kö-sida som visas innan man släpps in i butiken, för att
+ * kännas överbelastad ("väldigt många handlar just nu"). Denna sida (index.html)
+ * innehåller ingen butikskod alls, så inga popups kan dyka upp under väntan.
+ * Efter WAIT_MS skickas besökaren vidare till shop.html. */
+
+const WAIT_MS = 20000;
 
 (function () {
   const startPos = 1200 + Math.floor(Math.random() * 2400);
-  const totalDuration = 4500 + Math.random() * 2000;
   const startTime = Date.now();
 
   const posEl = document.getElementById('queue-position');
@@ -17,10 +20,10 @@
 
   function tick() {
     const elapsed = Date.now() - startTime;
-    const rawProgress = Math.min(elapsed / totalDuration, 1);
+    const rawProgress = Math.min(elapsed / WAIT_MS, 1);
     const progress = easeOutQuad(rawProgress);
     const remainingPos = Math.max(0, Math.round(startPos * (1 - progress)));
-    const remainingSeconds = Math.max(0, Math.ceil((totalDuration - elapsed) / 1000));
+    const remainingSeconds = Math.max(0, Math.ceil((WAIT_MS - elapsed) / 1000));
 
     posEl.textContent = remainingPos.toLocaleString('sv-SE');
     etaEl.textContent = remainingSeconds <= 1 ? 'Nästan klart...' : remainingSeconds + ' sekunder';
@@ -30,11 +33,11 @@
       requestAnimationFrame(tick);
     } else {
       screenEl.classList.add('fade-out');
-      document.documentElement.style.overflow = '';
-      setTimeout(() => screenEl.remove(), 600);
+      setTimeout(() => {
+        window.location.href = 'shop.html';
+      }, 500);
     }
   }
 
-  document.documentElement.style.overflow = 'hidden';
   requestAnimationFrame(tick);
 })();

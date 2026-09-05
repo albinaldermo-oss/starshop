@@ -80,7 +80,7 @@ function makeVariants(baseName, category, basePrice, badge, colorCount, keyword)
 }
 
 const MEN_BASE = [
-  ['Oversized T-shirt', 19, 'BÄST SÄLJANDE', 'tshirt,man'],
+  ['Oversized T-shirt', 19, 'BÄST SÄLJANDE', 'https://img.kwcdn.com/product/21137b26e12/fdcfed4d-27af-4d8b-ab62-2fe4e9a85641_1340x1785.jpeg?imageView2/2/w/800/q/70/format/avif'],
   ['Grafisk T-shirt', 25, null, 'tshirt,graphic'],
   ['Linne', 15, null, 'tanktop,man'],
   ['Hoodie med luva', 59, null, 'hoodie,man'],

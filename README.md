@@ -1,16 +1,15 @@
 # ⭐ Star Shop
 
-En Temu-inspirerad demo-webshop med massor av billiga klädesplagg — mest herrmode,
-men även dam, barn och accessoarer. Byggd som en ren frontend-demo: ingen
-backend, inget riktigt köp.
+En Temu-inspirerad webshop med massor av billiga klädesplagg — mest herrmode,
+men även dam, barn och accessoarer. Ren frontend, ingen backend.
 
-## Vad fungerar?
+## Funktioner
 
 - Bläddra bland ~100 produkter, filtrera per kategori och sök
 - Lägga till produkter i varukorgen, ändra antal och ta bort dem
   (sparas i webbläsarens `localStorage`)
-- Allt annat — betalning, konton, leverans — är endast dekoration.
-  Kassaknappen visar ett meddelande om att köp inte stöds.
+- Kassaflöde med ordersammanställning, val av betalsätt och orderbekräftelse
+  (simulerat i frontend, utan riktig betalningshantering)
 
 ## Köra lokalt
 
@@ -27,4 +26,4 @@ python3 -m http.server 8000
 - `css/style.css` – styling
 - `js/data.js` – produktdata (genereras programmatiskt)
 - `js/cart.js` – varukorgslogik (localStorage)
-- `js/main.js` – rendering, filter, sök, UI-interaktioner
+- `js/main.js` – rendering, filter, sök, kassaflöde

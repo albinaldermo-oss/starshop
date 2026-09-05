@@ -102,10 +102,94 @@ document.getElementById('checkout-btn').addEventListener('click', () => {
     showToast('Din varukorg är tom 🛒');
     return;
   }
-  alert(
-    '⭐ Star Shop\n\nDetta är en demo-webshop. Betalning och beställning stöds inte – tack för att du testade!'
-  );
+  closeCart();
+  openCheckout();
 });
+
+document.getElementById('checkout-modal-close').addEventListener('click', closeCheckout);
+document.getElementById('checkout-overlay').addEventListener('click', closeCheckout);
+
+function openCheckout() {
+  renderCheckoutSummary();
+  document.getElementById('checkout-overlay').classList.add('open');
+  document.getElementById('checkout-modal').classList.add('open');
+}
+
+function closeCheckout() {
+  document.getElementById('checkout-overlay').classList.remove('open');
+  document.getElementById('checkout-modal').classList.remove('open');
+}
+
+function renderCheckoutSummary() {
+  const cart = getCart();
+  const body = document.getElementById('checkout-modal-body');
+  const subtotal = getCartTotal();
+  const shipping = subtotal >= 199 || subtotal === 0 ? 0 : 39;
+  const total = subtotal + shipping;
+
+  const linesHtml = cart
+    .map((item) => {
+      const p = PRODUCTS.find((prod) => prod.id === item.id);
+      if (!p) return '';
+      return `
+        <div class="checkout-line">
+          <img src="${p.image}" alt="${p.name}">
+          <span class="checkout-line-name">${p.name} × ${item.qty}</span>
+          <span class="checkout-line-price">${p.price * item.qty} kr</span>
+        </div>`;
+    })
+    .join('');
+
+  body.innerHTML = `
+    <div class="checkout-summary">${linesHtml}</div>
+    <div class="checkout-row">
+      <span>Frakt</span>
+      <span>${shipping === 0 ? 'Gratis' : shipping + ' kr'}</span>
+    </div>
+    <div class="checkout-row checkout-total">
+      <span>Att betala</span>
+      <span>${total} kr</span>
+    </div>
+    <div class="payment-methods">
+      <label class="payment-option"><input type="radio" name="payment" checked> 💳 Kort</label>
+      <label class="payment-option"><input type="radio" name="payment"> 📱 Swish</label>
+      <label class="payment-option"><input type="radio" name="payment"> 🅺 Klarna</label>
+    </div>
+    <button class="pay-btn" id="pay-btn">Betala ${total} kr</button>
+  `;
+
+  document.getElementById('pay-btn').addEventListener('click', handlePayment);
+}
+
+function handlePayment() {
+  const body = document.getElementById('checkout-modal-body');
+  body.innerHTML = `
+    <div class="paying">
+      <div class="spinner"></div>
+      <p>Behandlar din betalning...</p>
+    </div>
+  `;
+  setTimeout(showOrderConfirmation, 1300);
+}
+
+function showOrderConfirmation() {
+  const orderNumber = 'STAR-' + Math.floor(100000 + Math.random() * 900000);
+  const body = document.getElementById('checkout-modal-body');
+  body.innerHTML = `
+    <div class="confirmation">
+      <div class="confirmation-icon">✅</div>
+      <h4>Tack för din beställning!</h4>
+      <p>Din betalning har genomförts och ordern är bekräftad.</p>
+      <p class="order-number">Ordernummer: <strong>${orderNumber}</strong></p>
+      <p class="delivery-estimate">Beräknad leverans: 3–5 arbetsdagar</p>
+      <button class="continue-btn" id="continue-shopping-btn">Fortsätt handla</button>
+    </div>
+  `;
+  document.getElementById('continue-shopping-btn').addEventListener('click', () => {
+    saveCart([]);
+    closeCheckout();
+  });
+}
 
 /* Fejkad nedräkningsklocka för REA-bannern, loopar var 6:e timme */
 function startCountdown() {

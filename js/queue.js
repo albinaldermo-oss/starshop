@@ -12,7 +12,6 @@ const WAIT_MS = 20000;
   const posEl = document.getElementById('queue-position');
   const etaEl = document.getElementById('queue-eta');
   const barEl = document.getElementById('queue-bar-fill');
-  const screenEl = document.getElementById('queue-screen');
 
   function easeOutQuad(t) {
     return 1 - (1 - t) * (1 - t);
@@ -32,10 +31,7 @@ const WAIT_MS = 20000;
     if (rawProgress < 1) {
       requestAnimationFrame(tick);
     } else {
-      screenEl.classList.add('fade-out');
-      setTimeout(() => {
-        window.location.href = 'shop.html';
-      }, 500);
+      window.location.href = 'shop.html';
     }
   }
 

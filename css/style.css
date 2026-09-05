@@ -848,6 +848,93 @@ button {
   background: var(--brand-dark);
 }
 
+/* Live shopper counter (bottom-right) */
+.live-counter {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--text);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 24px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  z-index: 140;
+  animation: livePulse 2s ease-in-out infinite;
+}
+@keyframes livePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Spin & win wheel */
+.wheel-wrap {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 18px;
+}
+.wheel-pointer {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.4rem;
+  z-index: 2;
+}
+.wheel {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  background: conic-gradient(
+    var(--brand) 0deg 45deg, var(--accent) 45deg 90deg,
+    var(--brand) 90deg 135deg, var(--accent) 135deg 180deg,
+    var(--brand) 180deg 225deg, var(--accent) 225deg 270deg,
+    var(--brand) 270deg 315deg, var(--accent) 315deg 360deg
+  );
+  transition: transform 3.5s cubic-bezier(0.17, 0.67, 0.16, 0.99);
+}
+.spin-result {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--brand-dark) !important;
+}
+
+/* Urgency pulses */
+.badge-discount {
+  animation: badgePulse 1.4s ease-in-out infinite;
+}
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+.time-box {
+  animation: timeFlash 1s step-start infinite;
+}
+@keyframes timeFlash {
+  0%, 100% { background: rgba(0, 0, 0, 0.25); }
+  50% { background: rgba(200, 0, 0, 0.45); }
+}
+.stock-warning {
+  animation: stockShake 0.6s ease-in-out infinite;
+}
+@keyframes stockShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-1px); }
+  75% { transform: translateX(1px); }
+}
+.checkout-btn,
+.add-to-cart-btn {
+  animation: ctaGlow 1.6s ease-in-out infinite;
+}
+@keyframes ctaGlow {
+  0%, 100% { box-shadow: 0 0 0 rgba(255, 59, 59, 0); }
+  50% { box-shadow: 0 0 14px rgba(255, 59, 59, 0.5); }
+}
+
 @media (max-width: 640px) {
   .header-inner {
     flex-wrap: wrap;

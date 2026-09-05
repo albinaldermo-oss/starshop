@@ -102,6 +102,39 @@ const MEN_BASE = [
   ['Träningsset', 199, null, 'tracksuit'],
 ];
 
+const MEN_BASE2 = [
+  ['Kortärmad Skjorta', 89, null, 'shirt,man'],
+  ['Långärmad Skjorta', 99, null, 'shirt,formal'],
+  ['Kostym Blazer', 399, 'NYHET', 'blazer,suit'],
+  ['Kostymbyxor', 249, null, 'suitpants'],
+  ['Väst', 179, null, 'vest,man'],
+  ['Fleecetröja', 149, null, 'fleece,jacket'],
+  ['Softshelljacka', 279, null, 'softshell,jacket'],
+  ['Parkas', 399, 'NYHET', 'parka'],
+  ['Skinnjacka', 349, 'TRENDIGT', 'leatherjacket'],
+  ['Jeansjacka', 299, null, 'denimjacket'],
+  ['Sportjacka', 199, null, 'trackjacket'],
+  ['Regnjacka', 229, null, 'raincoat'],
+  ['Träningsjacka', 189, null, 'trackjacket,sport'],
+  ['Träningsbyxor', 149, null, 'sweatpants,sport'],
+  ['Muscle Fit T-shirt', 59, 'BÄST SÄLJANDE', 'tshirt,fitness'],
+  ['Långärmad Tröja', 79, null, 'longsleeve'],
+  ['Termotröja', 99, null, 'thermal,shirt'],
+  ['Underställ Set', 149, null, 'thermal,underwear'],
+  ['Boxershorts Single', 49, null, 'boxershorts'],
+  ['Linnetröja', 189, null, 'linen,shirt'],
+  ['Denimskjorta', 159, null, 'denim,shirt'],
+  ['Ledig Skjorta', 129, null, 'shirt,casual'],
+  ['Sweatpants Set', 219, null, 'sweatpants,man'],
+  ['Vindtät Väst', 199, null, 'vest,windproof'],
+  ['Cargo Shorts', 99, null, 'cargoshorts'],
+  ['Träningströja Mesh', 89, null, 'sportshirt,mesh'],
+  ['Kofta', 179, null, 'cardigan'],
+  ['Rugbytröja', 139, null, 'rugbyshirt'],
+  ['Termobyxor', 129, null, 'thermalpants'],
+  ['Höstjacka', 259, 'NYHET', 'autumnjacket'],
+];
+
 const WOMEN_BASE = [
   ['Sommarklänning', 129, 'NYHET', 'dress,summer'],
   ['Croppad tröja', 59, null, 'croptop'],
@@ -135,6 +168,10 @@ let PRODUCTS = [];
 
 MEN_BASE.forEach(([name, price, badge, keyword], i) => {
   PRODUCTS = PRODUCTS.concat(makeVariants(name, 'herr', price, badge, 2 + (i % 3), keyword));
+});
+
+MEN_BASE2.forEach(([name, price, badge, keyword], i) => {
+  PRODUCTS = PRODUCTS.concat(makeVariants(name, 'herr', price, badge, 2 + (i % 4), keyword));
 });
 
 WOMEN_BASE.forEach(([name, price, badge, keyword], i) => {

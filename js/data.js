@@ -1,12 +1,21 @@
 /* Star Shop – produktdata
  * Genererar ett stort sortiment av billiga klädesplagg, med tonvikt på herrmode.
- * Produktbilder hämtas som riktiga foton från LoremFlickr (Flickr-foton matchade
- * mot sökord, låst per produkt-id så samma bild alltid visas för samma produkt).
+ *
+ * BYTA BILDER SJÄLV:
+ * Varje rad i MEN_BASE/WOMEN_BASE/KIDS_BASE/ACCESSORIES_BASE nedan har ett fjärde
+ * fält (t.ex. 'tshirt,man') som styr bilden för just det plagget:
+ *   - Ett sökord (eller "sökord1,sökord2") hämtar ett foto från LoremFlickr som
+ *     matchar det sökordet.
+ *   - En egen bild-URL (som börjar med http:// eller https://) används direkt –
+ *     byt bara ut sökordet mot länken till din egen bild.
  */
 
 const COLORS = ['Svart', 'Vit', 'Grå', 'Marinblå', 'Khaki', 'Beige', 'Röd', 'Militärgrön', 'Brun'];
 
 function imageForKeyword(keyword, lockId) {
+  if (/^https?:\/\//i.test(keyword)) {
+    return keyword;
+  }
   return `https://loremflickr.com/500/650/${keyword}/all?lock=${lockId}`;
 }
 
@@ -22,6 +31,14 @@ function soldForIndex(i) {
 function ratingForIndex(i) {
   const table = [4.3, 4.5, 4.6, 4.7, 4.8, 4.9, 4.4];
   return table[i % table.length];
+}
+
+function stockLeftForIndex(i) {
+  return i % 3 === 0 ? 2 + ((i * 7) % 8) : null;
+}
+
+function viewersForIndex(i) {
+  return 3 + ((i * 11) % 40);
 }
 
 let __id = 1;
@@ -45,6 +62,8 @@ function makeVariants(baseName, category, basePrice, badge, colorCount, keyword)
       image: imageForKeyword(keyword, index),
       rating: ratingForIndex(index),
       sold: soldForIndex(index),
+      stockLeft: stockLeftForIndex(index),
+      viewers: viewersForIndex(index),
       badge: badge || null,
     });
   }

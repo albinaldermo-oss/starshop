@@ -52,6 +52,8 @@ function renderProducts() {
           <span class="price-now">${p.price} kr</span>
           <span class="price-old">${p.oldPrice} kr</span>
         </div>
+        <p class="viewers-line">👀 ${p.viewers} tittar på denna just nu</p>
+        ${p.stockLeft ? `<p class="stock-warning">🔥 Endast ${p.stockLeft} kvar i lager!</p>` : ''}
         <button class="add-to-cart-btn" onclick="addToCart(${p.id})">+ Lägg i varukorg</button>
       </div>
     </article>

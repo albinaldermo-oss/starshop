@@ -944,4 +944,42 @@ button {
     max-width: 100%;
     width: 100%;
   }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .product-card {
+    border-radius: 8px;
+  }
+  .product-info {
+    padding: 6px 8px 8px;
+    gap: 2px;
+  }
+  .product-name {
+    font-size: 0.7rem;
+    min-height: 2em;
+  }
+  .product-rating {
+    font-size: 0.6rem;
+  }
+  .price-now {
+    font-size: 0.85rem;
+  }
+  .price-old {
+    font-size: 0.68rem;
+  }
+  .viewers-line,
+  .stock-warning {
+    font-size: 0.6rem;
+  }
+  .add-to-cart-btn {
+    padding: 6px 0;
+    font-size: 0.68rem;
+    margin-top: 4px;
+  }
+  .badge {
+    font-size: 0.55rem;
+    padding: 2px 5px;
+  }
 }

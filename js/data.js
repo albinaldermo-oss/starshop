@@ -1,14 +1,23 @@
 /* Star Shop – produktdata
  * Genererar ett stort sortiment av billiga klädesplagg, med tonvikt på herrmode.
  *
- * BYTA BILDER SJÄLV:
- * Varje rad i MEN_BASE/WOMEN_BASE/KIDS_BASE/ACCESSORIES_BASE nedan har ett fjärde
- * fält (t.ex. 'tshirt,man') som styr bilden för just det plagget:
- *   - Ett sökord (eller "sökord1,sökord2") hämtar ett foto från LoremFlickr som
- *     matchar det sökordet.
- *   - En egen bild-URL (som börjar med http:// eller https://) används direkt –
- *     byt bara ut sökordet mot länken till din egen bild.
+ * BYTA BILDER SJÄLV – två sätt:
+ *
+ * 1) En specifik produkt (t.ex. bara den svarta T-shirten):
+ *    Lägg till en rad i CUSTOM_IMAGES nedan med produktens exakta namn och
+ *    din bild-URL. Detta vinner alltid över allt annat.
+ *
+ * 2) Alla färger av en hel plaggtyp på en gång:
+ *    Varje rad i MEN_BASE/WOMEN_BASE/KIDS_BASE/ACCESSORIES_BASE längre ner har
+ *    ett fjärde fält (t.ex. 'tshirt,man'). Byt ut det mot din egen bild-URL
+ *    (måste börja med http:// eller https://) så används den för alla färger
+ *    av just det plagget.
  */
+
+const CUSTOM_IMAGES = {
+  // 'Oversized T-shirt – Svart': 'https://din-sida.se/bilder/svart-tshirt.jpg',
+  // 'Hoodie med luva – Vit': 'https://din-sida.se/bilder/vit-hoodie.jpg',
+};
 
 const COLORS = ['Svart', 'Vit', 'Grå', 'Marinblå', 'Khaki', 'Beige', 'Röd', 'Militärgrön', 'Brun'];
 
@@ -59,7 +68,7 @@ function makeVariants(baseName, category, basePrice, badge, colorCount, keyword)
       price,
       oldPrice,
       discount,
-      image: imageForKeyword(keyword, index),
+      image: CUSTOM_IMAGES[name] || imageForKeyword(keyword, index),
       rating: ratingForIndex(index),
       sold: soldForIndex(index),
       stockLeft: stockLeftForIndex(index),
